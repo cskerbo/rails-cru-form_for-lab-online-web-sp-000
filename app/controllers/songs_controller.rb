@@ -5,19 +5,16 @@ class SongsController < ApplicationController
 
   	def show
   		@song = Song.find(params[:id])
-
       @artist = Artist.find(@song.artist_id)
       @genre = Genre.find(@song.genre_id)
   	end
 
   	def new
   		@song = Song.new
-      @artist = Artist.new
-      @genre = Genre.new
   	end
 
   	def create
-  	  @song = Song.new(song_params(:name))
+  	  @song = Song.new(song_params(:name, :artist_id, :genre_id))
   	  @song.save
   	  redirect_to song_path(@song)
   	end
